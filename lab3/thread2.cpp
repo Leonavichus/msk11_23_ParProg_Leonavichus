@@ -1,22 +1,13 @@
 #include <iostream>
 #include <thread>
 
-using namespace std;
-
-// Функция, которая будет выполняться в каждом потоке
+// Функция, которую будут выполнять потоки
 void threadFunction(int intValue, float floatValue, double *doubleValue)
 {
-    // Вывод идентификатора потока
-    cout << "Thread ID: " << this_thread::get_id() << endl;
-
-    // Вывод переданных параметров
-    cout << "int: " << intValue << endl;
-    cout << "float: " << floatValue << endl;
-
-    if (doubleValue != nullptr)
-    {
-        cout << "double: " << *doubleValue << endl;
-    }
+    std::cout << "Поток ID: " << std::this_thread::get_id() << std::endl;
+    std::cout << "int значение: " << intValue << std::endl;
+    std::cout << "float значение: " << floatValue << std::endl;
+    std::cout << "double значение: " << *doubleValue << std::endl;
 }
 
 int main()
@@ -25,12 +16,12 @@ int main()
     float floatValue = 3.14;
     double doubleValue = 2.71828;
 
-    // Создаем 3 потока и передаем им параметры
-    thread thread1(threadFunction, intValue, floatValue, &doubleValue);
-    thread thread2(threadFunction, intValue * 2, floatValue * 2, &doubleValue);
-    thread thread3(threadFunction, intValue * 3, floatValue * 3, nullptr);
+    // Создание и запуск 3 потоков
+    std::thread thread1(threadFunction, intValue, floatValue, &doubleValue);
+    std::thread thread2(threadFunction, intValue + 1, floatValue + 1, &doubleValue);
+    std::thread thread3(threadFunction, intValue + 2, floatValue + 2, &doubleValue);
 
-    // Ждем завершения всех потоков
+    // Ожидание завершения потоков
     thread1.join();
     thread2.join();
     thread3.join();
