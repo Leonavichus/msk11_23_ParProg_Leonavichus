@@ -1,13 +1,15 @@
 #include <thread>
 #include <iostream>
 
+using namespace std;
+
 void threadProc()
 {
-    printf("Inside thread = %d", std::this_thread::get_id());
+    printf("Inside thread = %d", this_thread::get_id());
 }
 
 int main()
 {
-    std::thread t(threadProc);
+    thread t(threadProc);
     t.join();
 }

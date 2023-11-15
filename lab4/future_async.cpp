@@ -2,13 +2,15 @@
 #include <thread>
 #include <future>
 
+using namespace std;
+
 int add(int a, int b) {
     return a + b;
 }
 
 int main() {
-    std::future<int> f = std::async(add, 5, 15);
+    future<int> f = async(add, 5, 15);
     int result = f.get();
-    std::cout << "Результат: " << result << std::endl;
+    cout << "Результат: " << result << endl;
     return 0;
 }
